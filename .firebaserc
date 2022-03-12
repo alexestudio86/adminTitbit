@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "comandas-3a9bd"
+  },
+  "targets": {
+    "comandas-3a9bd": {
+      "hosting": {
+        "admin": [
+          "comandas-3a9bd"
+        ]
+      }
+    }
+  }
+}

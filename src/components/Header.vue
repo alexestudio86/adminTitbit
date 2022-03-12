@@ -1,5 +1,5 @@
 <template>
-  <header class="w3-bar w3-white">
+  <header class="w3-bar w3-light-gray w3-border">
     <button class="w3-button w3-gray w3-hide-large" v-on:click="openSidebar">
       <i class="fas fa-bars"></i>
     </button>

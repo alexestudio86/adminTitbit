@@ -4,7 +4,7 @@
     <div v-if='loader'>
       <PlaceholderArticle />
     </div>
-    <article class="w3-white mb-3 px-3 py-1" v-for='(order, index) of orders' :key='index'>
+    <article class="w3-white mb-3 px-3 py-1 w3-animate-right" v-for='(order, index) of orders' :key='index'>
       <div class="w3-row">
           <div class="w3-col m1 w3-white">
               <img class="w3-circle w-100" src="../assets/logo-titbit_grayscale.webp" alt="Logo Titbit escala de grises" width="70" height='auto'>
@@ -12,7 +12,7 @@
                 <small>Entregado</small>
               </div>
               <div v-else>
-                <div v-for='(estado, key, idx) of order.estado' :key="idx">
+                <div v-for='(estado, key, idx) of order.status' :key="idx">
                   <small v-if='estado'>{{ key }}</small>
                 </div>
               </div>

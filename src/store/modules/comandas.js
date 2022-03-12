@@ -1,9 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../../config.js'
-import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, onSnapshot, addDoc } from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export default {
     namespaced: true,
@@ -20,9 +21,9 @@ export default {
     actions: {
         readOrders: async function ({ commit, state }) {
             state.loader = true
-            const db = getFirestore(app);
+            //const db = getFirestore(app);
             try{
-                const queryOrders = query(collection(db, 'orders'), orderBy('date', 'desc'));
+                const queryOrders = query(collection(db, 'orders'), orderBy('created', 'desc'));
                 const orderList = [];
                 const getOrders = await onSnapshot(queryOrders, (querySnapshot) => {
                     state.orders.splice(0, state.orders.length);
@@ -34,6 +35,18 @@ export default {
             }catch(error){
                 console.log(error)
             }
+        },
+        addOrder: async function({commit}, item ){
+            console.log(item)
+            
+            try{
+                // Add a new document in collection "cities"
+                const setOrder = await addDoc(collection(db, 'orders'), item);
+                console.log('documento creado');
+            }catch(error){
+                console.log(error)
+            }
+            
         }
     }
 }
