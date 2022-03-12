@@ -68,7 +68,7 @@
 <script>
 export default {
 
-  name: 'PlaceholderTable'
+  name: 'PlaceholderArticle'
 
 }
 </script>

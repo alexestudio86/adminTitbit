@@ -1,68 +1,33 @@
 <template>
-  <table class="w3-table-all w3-hoverable">
-    <thead>
-      <tr class="w3-light-grey">
-        <th>#</th>
-        <th class="">Nombre</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>1</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>2</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>3</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>4</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>5</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>6</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>7</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>8</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>9</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <article class="w3-white mb-3 px-3 py-1" >
+      <div class="w3-row" style='height:150px'>
+          <div class="w3-col m2 w3-center">
+              <!-- Image -->
+              <div class="loader" style="height:70px"></div>
+              <!-- Estado -->
+              <div class="loader"></div>
+          </div>
+          <div class="w3-col m10">
+            <div class="w3-row">
+              <div class="w3-col m9">
+                <!-- Title -->
+                <div class="loader"></div>
+                <!-- Details -->
+                <div class="loader" style="height:80px"></div>
+                <!-- Comments -->
+                <div class="loader" style="height:40px"></div>
+              </div>
+              <div class="w3-col m3">
+                <div class="w3-right">
+                  <div class="loader" ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </article>
+  </div>
 </template>
 
 <script>

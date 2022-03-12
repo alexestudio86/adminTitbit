@@ -3,10 +3,12 @@
     <!-- Placeholder -->
     <div v-if='loader'>
       <PlaceholderArticle />
+      <PlaceholderArticle />
+      <PlaceholderArticle />
     </div>
-    <article class="w3-white mb-3 px-3 py-1 w3-animate-right" v-for='(order, index) of orders' :key='index'>
+    <article class="w3-white mb-3 px-3 py-1" v-for='(order, index) of orders' :key='index'>
       <div class="w3-row">
-          <div class="w3-col m1 w3-white">
+          <div class="w3-col s2">
               <img class="w3-circle w-100" src="../assets/logo-titbit_grayscale.webp" alt="Logo Titbit escala de grises" width="70" height='auto'>
               <div v-if='order.delivered'>
                 <small>Entregado</small>
@@ -17,16 +19,16 @@
                 </div>
               </div>
           </div>
-          <div class="w3-col m11">
+          <div class="w3-col s10">
             <div class="w3-row">
-              <div class="w3-col m10">
+              <div class="w3-col m9">
                 <h1 class="w3-large p-1">{{ order.name }}</h1>
                 <p>{{ order.details }}</p>
                 <div class="py-2" v-if='order.comments'>
                   <p class="w3-panel w3-light-gray py-2">{{ order.comments }}</p>
                 </div>
               </div>
-              <div class="w3-col m2">
+              <div class="w3-col m3">
                 <div class="w3-right-align">
                   <button class="w3-button w3-white w3-border w3-border-red w3-round mx-1">
                     <i class="fas fa-trash text-danger w3-large"></i>

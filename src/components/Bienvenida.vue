@@ -1,5 +1,5 @@
 <template>
-  <div class='fullSize w3-display-container'>
+  <div class='fullSize w3-display-container w3-white'>
     <h1 class="w3-display-middle w3-xxlarge">Bienvenid@ al sistema de administración</h1>
   </div>
 </template>

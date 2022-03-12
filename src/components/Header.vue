@@ -1,25 +1,14 @@
 <template>
-  <header class="w3-bar w3-light-gray w3-border">
-    <button class="w3-button w3-gray w3-hide-large" v-on:click="openSidebar">
-      <i class="fas fa-bars"></i>
-    </button>
-    <div class="w3-container">
-      <ul class="nav nav-pills nav-fill">
-        <li class="nav-item py-3">
-          <span class="text-uppercase fs-5">Sistema de administración Titbit</span>
-        </li>
-        <li class="nav-item">
-          <img src="../assets/logo-titbit.png" alt="Logo Titbit" width="65" height='auto' />
-        </li>
-      </ul>
-    </div>
+  <header class="d-flex justify-content-around align-items-center w3-white w3-border-top w3-border-bottom">
+    <h1 class="text-uppercase w3-large">Sistema de administración Titbit</h1>
+    <img src="../assets/logo-titbit.png" alt="Logo Titbit" width="65" height='auto' />
   </header>
 </template>
 
 <script>
 export default {
 
-  name: 'Navbar',
+  name: 'Header',
   methods: {
     openSidebar(){
       document.getElementById("mySidebar").style.display = "block";
