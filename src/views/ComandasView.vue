@@ -3,7 +3,7 @@
     <SidebarComandas />
     <main class="w3-main w3-border w3-border-light-gray" style="margin-left:400px">
       <Navbar />
-      <Header />
+      <Header :headerTitle="headerTitle" />
       <OrderList />
     </main>
   </div>
@@ -18,6 +18,11 @@ import OrderList from '@/components/OrderList.vue'
 
 export default {
   name: 'Comandas',
+  data(){
+    return {
+      headerTitle: 'Alta de ćomandas'
+    }
+  },
   components: {
     SidebarComandas, Navbar, Header, OrderList
   }

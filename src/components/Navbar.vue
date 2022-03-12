@@ -6,19 +6,19 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-      <div class="w3-col s3 m4 w3-center">
+      <div class="w3-col s3 l4 w3-center">
         <router-link to='/' class="w3-bar-item w3-button w-100">
           <span class="w3-hide-small">Home</span>
           <i class="fas fa-home w3-hide-large"></i>
         </router-link>
       </div>
-      <div class="w3-col s3 m4 w3-center">
+      <div class="w3-col s3 l4 w3-center">
         <router-link to='/comandas' class="w3-bar-item w3-button w-100">
           <span class="w3-hide-small">Comandas</span>
           <i class="fab fa-elementor w3-hide-large"></i>
         </router-link>
       </div>
-      <div class="w3-col s3 m4 w3-center">
+      <div class="w3-col s3 l4 w3-center">
         <router-link to='/platillos' class="w3-bar-item w3-button w-100">
           <span class="w3-hide-small">Platillos</span>
           <i class="fas fa-utensils w3-hide-large"></i>

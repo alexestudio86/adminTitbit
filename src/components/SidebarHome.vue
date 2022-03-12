@@ -7,41 +7,21 @@
           Close <i class="fas fa-times"></i>
         </button>
       </div>
-      <router-link to='/' class="w3-bar-item py-2 w3-button w-100">
-        <span class="w3-hide-large">Home</span>
-        <i class="fas fa-home w3-hide-small w3-xxlarge"></i>
-      </router-link>
-      <router-link to='/comandas' class="w3-bar-item py-2 w3-button w-100">
-        <span class="w3-hide-large">Comandas</span>
-        <i class="fab fa-elementor w3-hide-small w3-xxlarge"></i>
-      </router-link>
-      <router-link to='/platillos' class="w3-bar-item py-2 w3-button w-100">
-        <span class="w3-hide-large">Platillos</span>
-        <i class="fas fa-utensils w3-hide-small w3-xxlarge"></i>
-      </router-link>
+      <LoginForm />
     </div>
   </aside>
 </template>
 
 
 <script>
+import LoginForm from '@/components/LoginForm.vue'
+
 export default {
 
   name: 'SidebarHome',
-  methods: {
-    closeSidebar() {
-      document.getElementById("mySidebar").style.display = "none";
-    }
+  components: {
+    LoginForm
   }
 
 }
 </script>
-
-<style scoped>
-
-  aside a.router-link-exact-active {
-    color:#000!important;
-    background-color:#ccc!important;
-  }
-
-</style>

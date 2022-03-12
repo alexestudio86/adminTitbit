@@ -1,24 +1,13 @@
 <template>
-  <div>
+  <div class="px-3 py-1 w3-white">
     <div v-if="loader">
-      <placeholder-table />
+      <PlaceholderTable />
     </div>
-    <div v-else class="w3-responsive">
-      <table class="w3-table-all w3-hoverable">
-        <thead>
-          <tr class="w3-light-grey">
-            <th>#</th>
-            <th>Nombre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for='(dish, index) of dishes' :key='index'>
-            <th>{{ index }}</th>
-            <td>{{ dish.title }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <ul class="w3-ul w3-light-gray w3-hoverable">
+      <li v-for='(dish, index) of dishes' :key='index'>
+        {{ dish.title }}
+      </li>
+    </ul>
   </div>
 </template>
 

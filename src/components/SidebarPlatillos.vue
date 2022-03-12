@@ -7,19 +7,19 @@
           Close <i class="fas fa-times"></i>
         </button>
       </div>
-      <DishListCreator />
+      <DishList />
     </div>
   </aside>
 </template>
 
 
 <script>
-import DishListCreator from '@/components/DishListCreator.vue'
+import DishList from '@/components/DishList.vue'
 
 export default {
   name: 'SidebarPlatillos',
   components: {
-    DishListCreator
+    DishList
   },
   methods: {
     closeSidebar() {

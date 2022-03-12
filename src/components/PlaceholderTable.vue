@@ -1,68 +1,36 @@
 <template>
-  <table class="w3-table-all w3-hoverable">
-    <thead>
-      <tr class="w3-light-grey">
-        <th>#</th>
-        <th class="">Nombre</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>1</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>2</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>3</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>4</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>5</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>6</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>7</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>8</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>9</th>
-        <td>
-          <div class="loader"></div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <ul class="w3-ul w3-light-gray w3-hoverable">
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+    <li class="py-2">
+      <div class="loader"></div>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -76,11 +44,11 @@ export default {
 <style scoped>
 
 .loader {
-  border: 8px solid #ffffff;
+  border: 4px solid #ffffff;
   border-radius: 50%;
-  border-top: 8px solid #9e9e9e;
-  width: 30px;
-  height: 30px;
+  border-top: 4px solid #9e9e9e;
+  width: 25px;
+  height: 25px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }

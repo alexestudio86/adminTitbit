@@ -5,6 +5,8 @@
       <PlaceholderArticle />
       <PlaceholderArticle />
       <PlaceholderArticle />
+      <PlaceholderArticle />
+      <PlaceholderArticle />
     </div>
     <article class="w3-white mb-3 px-3 py-1" v-for='(order, index) of orders' :key='index'>
       <div class="w3-row">

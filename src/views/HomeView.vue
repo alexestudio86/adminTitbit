@@ -3,7 +3,7 @@
     <SidebarHome />
     <main class="w3-main w3-border w3-border-light-gray zIndex-1" style='margin-left:400px'>
       <Navbar />
-      <Header />
+      <Header :headerTitle="headerTitle" />
       <Bienvenida />
     </main>
   </div>
@@ -18,6 +18,11 @@ import Bienvenida from '@/components/Bienvenida.vue'
 
 export default {
   name: 'HomeView',
+  data(){
+    return {
+      headerTitle: 'Sistema de Administración'
+    }
+  },
   components: {
     SidebarHome, Navbar, Header, Bienvenida
   }
