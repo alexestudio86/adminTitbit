@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../../config.js'
-import { getFirestore, collection, query, orderBy, onSnapshot, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -36,17 +36,24 @@ export default {
                 console.log(error)
             }
         },
-        addOrder: async function({commit}, item ){
-            console.log(item)
-            
+        addOrder: async function({commit}, item){
             try{
                 // Add a new document in collection "cities"
                 const setOrder = await addDoc(collection(db, 'orders'), item);
-                console.log('documento creado');
+                console.log('Documento creado con éxito');
             }catch(error){
                 console.log(error)
             }
             
+        },
+        deleteOrder: async function({commit}, item){
+            try{
+                const deleteOrder = await deleteDoc(doc(db, "orders", item));
+                document.getElementById('orderModal').style.display='none';
+                console.log('Documento borrado con éxito');
+            }catch(error){
+                console.log(error)
+            }
         }
     }
 }

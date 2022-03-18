@@ -8,6 +8,7 @@
       <PlaceholderArticle />
       <PlaceholderArticle />
     </div>
+    <!-- Articles -->
     <article class="w3-white mb-3 px-3 py-1" v-for='(order, index) of orders' :key='index'>
       <div class="w3-row">
           <div class="w3-col s2">
@@ -32,7 +33,7 @@
               </div>
               <div class="w3-col m3">
                 <div class="w3-right-align">
-                  <button class="w3-button w3-white w3-border w3-border-red w3-round mx-1">
+                  <button class="w3-button w3-white w3-border w3-border-red w3-round mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" @click='showOrderModal(order.id)'>
                     <i class="fas fa-trash text-danger w3-large"></i>
                   </button>
                   <button class="w3-button w3-white w3-border w3-border-blue w3-round mx-1">
@@ -47,18 +48,27 @@
           </div>
       </div>
     </article>
+    <!-- Order Modal -->
+    <order-modal :orderID='orderID' />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
 import PlaceholderArticle from './PlaceholderArticle.vue';
+import OrderModal from './OrderModal.vue';
 
 export default {
 
   name: 'Order',
+  data(){
+    return{
+      orderID: ''
+    }
+  },
   components: {
-    PlaceholderArticle
+    PlaceholderArticle, OrderModal,
+    OrderModal
   },
   created: function(){
     this.readOrders();
@@ -68,8 +78,11 @@ export default {
   },
   methods: {
     ...mapMutations('comandas', ['allOrders']),
-    ...mapActions('comandas', ['readOrders'])
+    ...mapActions('comandas', ['readOrders']),
+    showOrderModal(evt){
+      this.orderID = evt;
+      document.getElementById('orderModal').style.display='block';
+    }
   }
-
 }
 </script>
