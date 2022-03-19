@@ -5,10 +5,10 @@
       <h2 class="w3-padding-16 w3-large w3-center">¿ELIMINAR PRODUCTO?</h2>
     </header>
     <div class="w3-padding-32 w3-row">
-      <div class="w3-half w3-center">
+      <div class="w3-col s6 w3-center">
         <button @click="hideOrderModal" class="w3-button w3-white w3-border w3-border-red">Cancelar</button>
       </div>
-      <div class="w3-half w3-center">
+      <div class="w3-col s6 w3-center">
         <button class="w3-button w3-white w3-border w3-border-green" :data-ident='orderID' @click="deleteOrder(orderID)">Aceptar</button>
       </div>
     </div>
@@ -24,7 +24,7 @@ import { mapActions } from 'vuex'
 
 export default {
 
-  name: 'Order',
+  name: 'OrderDeleteModal',
   props: {
     orderID: String
   },

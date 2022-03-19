@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class='w3-white p-3'>
+            <!-- NOMBRES Y VARIANTES -->
             <form v-on:submit.prevent>
                 <div class='mb-3'>
                     <span>*Orden</span>
@@ -14,6 +15,7 @@
                     <div class='my-3' v-if='orderVariants.length > 0'>
                         <span>*Variante</span>
                         <select class='w3-select' name="variantOrder" id="variantOrder" v-model='variantSelected' >
+                            <option value="" disabled='disabled' selected='selected'>Elija una opción</option>
                             <option v-for='(v, index) of orderVariants' :key="index" :value='v' >{{ v }}</option>
                         </select>
                     </div>
@@ -34,6 +36,7 @@
                     </div>
                 </div>
             </form>
+            <!-- ELEMENTOS -->
             <div class="w3-border p-2 my-3 w3-light-gray">
                 <div class="tooltip">
                     <span class="tooltiptext px-1" id='elementsTooltip'>Añada un elemento</span>
@@ -43,10 +46,12 @@
                     <span class="w3-badge w3-red m-1" style='cursor:pointer' v-on:click='deleteOrderElement(i)' >×</span>
                 </p>
             </div>
+            <!-- COMENTARIOS -->
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1">Comentarios</label>
                 <textarea class="w3-input w3-border" v-model='orderComments'></textarea>
             </div>
+            <!-- FACTURA Y CLIENTE -->
             <div class="w3-row">
                 <div class="w3-col m2 w3-center">
                     <div>
@@ -118,12 +123,13 @@ export default {
             const index = this.dishes.findIndex( i => i.title === this.orderTitle );
             const variants = this.dishes[index].variant;
             this.orderVariants.splice(0, this.orderVariants.length);
-            this.variantSelected = ''
+            this.variantSelected = '';
             if( variants.length > 0 ){
                 variants.forEach( variant => {                        
                     this.orderVariants.push( variant )
                 });
-                this.variantSelected = this.orderVariants[0];
+                //Select first element of variants
+                //this.variantSelected = this.orderVariants[0];
             }
         },
         makeOrderElement(){
@@ -178,11 +184,15 @@ export default {
                 }
             } else {
                 // Convert array elements to string
-                const detalles = ( this.orderElements.map( (g) => {
-                    // Other form to retun join in a map
+                //const detalles = ( this.orderElements.map( (g) => {
                     //return `${g.title} x ${g.quantity}`
-                    return [g.title, g.quantity].join(' x ')
-                }) ).toString();
+                    // Other form to retun join in a map
+                    //return [g.title, g.quantity].join(' x ')
+                //}) ).toString();
+                const detalles = ( this.orderElements.map( (g) => {
+                    return `${g.title} x ${g.quantity}`
+                //});
+                    }) )
                 const obj = {
                     comments:    this.orderComments,
                     created:        new Date(),

@@ -21,7 +21,11 @@ export default {
   name: 'SidebarHome',
   components: {
     LoginForm
+  },
+  methods: {
+    closeSidebar() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
   }
-
 }
 </script>
