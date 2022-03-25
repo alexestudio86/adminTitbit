@@ -73,13 +73,11 @@
             </div>
             <button class='w3-button w3-blue w-100' type='submit' v-on:click='addItem'>Añadir</button>
         </div>
-        <OrderAlert />
     </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
-import OrderAlert from './OrderAlert.vue'
 
 export default {
 
@@ -93,17 +91,14 @@ export default {
             orderElements: [],
             orderComments: '',
             orderInvoice: false,
-            guestName: ''
+            guestName: '',
         }
-    },
-    components: {
-        OrderAlert
     },
     created: function(){
         this.readDishes()
     },
     updated: function(){
-        this.bodyEvent()
+        this.bodyEvent();
     },
     computed: {
         ...mapState('platillos', ['dishes', 'loader'])
@@ -117,7 +112,7 @@ export default {
         },
         hideAllTooltips(){
             const allTooltips = document.querySelectorAll('.tooltiptext');
-            allTooltips.forEach( t => t.style.visibility='hidden' )
+            allTooltips.forEach( t => t.style.visibility='hidden' );
         },
         checkVariants(){
             const index = this.dishes.findIndex( i => i.title === this.orderTitle );
@@ -168,12 +163,6 @@ export default {
         deleteOrderElement( idx ){
             this.orderElements.splice(idx, 1)
         },
-        showOrderAlert(){
-            document.getElementById('id01').style.display='block'
-        },
-        hideOrderAlert(){
-            document.getElementById('id01').style.display='none'
-        },
         addItem(){
             if( this.orderElements.length < 1 || !this.guestName ){
                 if( this.orderElements.length < 1 ){
@@ -206,7 +195,7 @@ export default {
                     modified:   new Date(),
                     name:       this.guestName,
                 };
-                console.log( this.$store.dispatch('comandas/addOrder', obj) );
+                this.$store.dispatch('comandas/addOrder', obj);
                 // Reset forms
                 this.orderTitle = '';
                 this.orderQuantity = 1;
@@ -215,11 +204,6 @@ export default {
                 this.orderComments = '';
                 this.orderInvoice = false;
                 this.guestName = '';
-                // Show alert
-                //setTimeout(this.showOrderAlert, 400)
-                this.showOrderAlert();
-                // Set time out
-                setTimeout(this.hideOrderAlert, 1000);
             }
         }
     }

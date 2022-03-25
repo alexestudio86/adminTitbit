@@ -13,19 +13,26 @@
       <div class="w3-row">
           <div class="w3-col s3">
               <img class="w-100" src="../assets/logo-titbit_grayscale.webp" alt="Logo Titbit escala de grises" width="70" height='auto' style='height:70px; object-fit:cover; object-position:center; padding:8px 0'>
-              <div class="w3-center w3-padding" v-if='order.delivered'>
-                <small>Entregado</small>
-              </div>
-              <div v-else>
-                <div class="w3-center w3-padding" v-for='(estado, key, idx) of order.status' :key="idx">
-                  <small v-if='estado'>{{ key }}</small>
-                </div>
+              <div class="w3-center w3-padding" >
+                <small><i>{{ dateConvertion(order.created) }}</i></small>
               </div>
           </div>
           <div class="w3-col s9">
             <div class="w3-row">
               <div class="w3-col m9">
-                <h1 class="w3-large p-1">{{ order.name }}</h1>
+                <div class="w3-row">
+                  <div class="w3-col s8">
+                    <h1 class="w3-large p-1">{{ order.name }}</h1>
+                  </div>
+                  <div class="w3-col s4 w3-center" v-if='order.delivered'>
+                    <small><b>entregado</b></small>
+                  </div>
+                  <div class="w3-center" v-else>
+                    <div v-for='(estado, key, idx) of order.status' :key="idx">
+                      <small v-if='estado'><b>{{ key }}</b></small>
+                    </div>
+                  </div>
+                </div>
                 <div>
                   <p class="w3-small" v-for="(o, i) of order.details" :key="i">{{ o }}</p>
                 </div>
@@ -35,10 +42,10 @@
               </div>
               <div class="w3-col m3">
                 <div class="w3-right-align">
-                  <button class="w3-button w3-white w3-border w3-border-red w3-round mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" @click='showOrderModal(order.id)'>
+                  <button class="w3-button w3-white w3-border w3-border-red w3-round mx-1" data-ident='deleteModal' @click.stop='[getOrderID(order.id), showModal($event)]' >
                     <i class="fas fa-trash text-danger w3-large"></i>
                   </button>
-                  <button class="w3-button w3-white w3-border w3-border-blue w3-round mx-1">
+                  <button class="w3-button w3-white w3-border w3-border-blue w3-round mx-1" data-ident='editModal'  @click.stop='[getItem(order.id), showModal($event)]'>
                     <i class="fas fa-edit text-primary w3-large"></i>
                   </button>
                 </div>
@@ -52,13 +59,19 @@
     </article>
     <!-- Order Modal -->
     <order-delete-modal :orderID='orderID' />
+    <order-edit-modal :orderID="orderID" />
+
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex';
 import PlaceholderArticle from './PlaceholderArticle.vue';
 import OrderDeleteModal from './OrderDeleteModal.vue';
+import OrderEditModal from './OrderEditModal.vue';
+
+
+//import OrderAlert from './OrderAlert.vue'
 
 export default {
 
@@ -69,21 +82,29 @@ export default {
     }
   },
   components: {
-    PlaceholderArticle, OrderDeleteModal
+    PlaceholderArticle, OrderDeleteModal, OrderEditModal
   },
   created: function(){
     this.readOrders();
   },
-  computed: {
-    ...mapState('comandas', ['orders', 'loader'])
-  },
   methods: {
     ...mapMutations('comandas', ['allOrders']),
-    ...mapActions('comandas', ['readOrders']),
-    showOrderModal(evt){
+    ...mapActions('comandas', ['readOrders', 'getItem']),
+    getOrderID(evt){
       this.orderID = evt;
-      document.getElementById('orderModal').style.display='block';
+    },
+    showModal( evt ){
+      let modalIdentifier = evt.currentTarget.getAttribute('data-ident');
+      let getModal = document.getElementById( modalIdentifier );
+      getModal.classList.add('w3-show');
+    },
+    dateConvertion: function ( evt ){
+      return evt.toDate().toDateString();
     }
+  },
+  computed: {
+    ...mapState(['alertCategory']),
+    ...mapState('comandas', ['orders', 'loader']),
   }
 }
 </script>

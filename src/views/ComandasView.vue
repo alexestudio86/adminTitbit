@@ -5,6 +5,7 @@
       <Navbar />
       <Header :headerTitle="headerTitle" />
       <OrderList />
+      <OrderAlert v-if='alertCategory' />
     </main>
   </div>
 </template>
@@ -15,8 +16,12 @@ import SidebarComandas from '@/components/SidebarComandas.vue'
 import Navbar from '@/components/Navbar.vue'
 import Header from '@/components/Header.vue'
 import OrderList from '@/components/OrderList.vue'
+import OrderAlert from '@/components/OrderAlert.vue'
+
+import { mapState } from 'vuex';
 
 export default {
+
   name: 'Comandas',
   data(){
     return {
@@ -24,7 +29,11 @@ export default {
     }
   },
   components: {
-    SidebarComandas, Navbar, Header, OrderList
+    SidebarComandas, Navbar, Header, OrderList, OrderAlert
+  },
+  computed: {
+    ...mapState(['alertCategory']),
   }
+
 }
 </script>
