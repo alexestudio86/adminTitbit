@@ -4,6 +4,7 @@
     <main class="w3-main w3-border w3-border-light-gray" style="margin-left:400px">
       <Navbar />
       <Header :headerTitle="headerTitle" />
+      <h3 class="w3-padding w3-right-align w3-large">Registros Totales: {{ orders.length }}</h3>
       <OrderList />
       <OrderAlert v-if='alertCategory' />
     </main>
@@ -33,6 +34,7 @@ export default {
   },
   computed: {
     ...mapState(['alertCategory']),
+    ...mapState('comandas', ['orders'])
   }
 
 }

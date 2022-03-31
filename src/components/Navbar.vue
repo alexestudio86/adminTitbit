@@ -1,6 +1,6 @@
 <template>
   <nav class="sticky-top zIndex-2">
-    <div class="w3-row w3-large" style="background: #ddffdd">
+    <div class="w3-row w3-large w3-pale-green" >
       <div class="w3-col s3 w3-hide-large">
         <button class="w3-button w3-blue w-100 w3-hide-large" v-on:click="openSidebar">
           <i class="fas fa-bars"></i>
@@ -43,9 +43,9 @@ export default {
 
 <style scoped>
 
-aside a.router-link-exact-active {
-  color:#000!important;
-  background:rgb(35, 105, 8)!important;
+nav a.router-link-exact-active {
+  color:      #000!important;
+  background: #ccc!important;
 }
 
 </style>

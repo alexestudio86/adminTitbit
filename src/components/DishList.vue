@@ -3,11 +3,11 @@
     <div v-if="loader">
       <PlaceholderTable />
     </div>
-    <ul class="w3-ul w3-light-gray w3-hoverable">
-      <li v-for='(dish, index) of dishes' :key='index'>
+    <div class="w3-light-gray">
+      <button class="w3-button w3-padding w3-block" v-for='(dish, index) of dishes' :key='index' @click.stop='getDish(dish.id)' style="text-align:left; border-bottom:1px solid #ddd" >
         {{ dish.title }}
-      </li>
-    </ul>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     ...mapMutations('platillos', ['allDishes']),
-    ...mapActions('platillos', ['readDishes'])
+    ...mapActions('platillos', ['readDishes', 'getDish']),
   }
 
 }
