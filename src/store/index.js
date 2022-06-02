@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import comandas from './modules/comandas.js'
 import platillos from './modules/platillos.js'
+import login from './modules/login.js'
 
 
 Vue.use(Vuex)
@@ -19,6 +20,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    comandas, platillos
+    comandas, platillos, login
   }
 })
