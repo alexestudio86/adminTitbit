@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut  } from 'firebase/auth';
 import firebaseConfig from '../../config.js'
+import { async } from '@firebase/util';
 
 // Initialize Firebase
 const app   =   initializeApp(firebaseConfig);
@@ -15,42 +16,34 @@ export default {
             email:       'alexestudio86@gmail.com',
             password:   '123456'
         },
+        loginStatus: false
     },
     mutations: {
-
+        loginTrue: function( state ){
+            state.loginStatus   =   true;
+        },
+        loginFalse: function( state ){
+            state.loginStatus   =   false;
+        }
     },
     actions: {
-
-        /*
-        signIn: function ({ commit, state }){
-            signInWithEmailAndPassword(auth, state.dataUser.email, state.dataUser.password)
-            .then((userCredential) => {
-              // Signed in
-              const user = userCredential.user;
-              console.log('Bienvenido')
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              console.log('Error al loguearte')
-            });
-        }
-        */
-
-
         signIn: async function ({ commit, state }) {
             try{
-                const getLogin  =   await signInWithEmailAndPassword( auth, state.dataUser.email, state.dataUser.password )
-                .userCredential(                    
-                    // Signed in
-                    const user = userCredential.user;
-                )
-                return user
+                const userCredential  =   await signInWithEmailAndPassword( auth, state.dataUser.email, state.dataUser.password );
+                const user = userCredential.user;
+                commit('loginTrue');
+            }catch(error){
+                console.log(`Code: ${error.code}, message: ${error.message}`)
+            }
+        },
+        signOut: async function({ commit }){
+            try{
+                await signOut(auth);
+                commit('loginFalse')
+                console.log('Usuario fuera');
             }catch(error){
                 console.log(error)
             }
         }
-
-
     }
 }
