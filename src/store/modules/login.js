@@ -13,14 +13,16 @@ export default {
     namespaced: true,
     state: {
         dataUser: {
-            email:       'alexestudio86@gmail.com',
-            password:   '123456'
+            email:      localStorage.length > 0 ? JSON.parse(localStorage.getItem('user')).email : '',
+            password:   localStorage.length > 0 ? JSON.parse(localStorage.getItem('user')).password : '',
         },
+        loader: null,
         loginStatus: false
     },
     mutations: {
         loginTrue: function( state ){
             state.loginStatus   =   true;
+            state.loader        =   false;
         },
         loginFalse: function( state ){
             state.loginStatus   =   false;
@@ -28,6 +30,7 @@ export default {
     },
     actions: {
         signIn: async function ({ commit, state }) {
+            state.loader = true;
             try{
                 const userCredential  =   await signInWithEmailAndPassword( auth, state.dataUser.email, state.dataUser.password );
                 const user = userCredential.user;
@@ -40,7 +43,6 @@ export default {
             try{
                 await signOut(auth);
                 commit('loginFalse')
-                console.log('Usuario fuera');
             }catch(error){
                 console.log(error)
             }
