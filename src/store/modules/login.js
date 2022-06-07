@@ -17,6 +17,7 @@ export default {
             password:   localStorage.length > 0 ? JSON.parse(localStorage.getItem('user')).password : '',
         },
         loader: null,
+        shaker: false,
         loginStatus: false
     },
     mutations: {
@@ -26,6 +27,12 @@ export default {
         },
         loginFalse: function( state ){
             state.loginStatus   =   false;
+            state.loader        =   false;
+        },
+        loginError: function( state ){
+            state.loader        =   false;
+            state.shaker        =   true;
+            setTimeout( ()=> state.shaker = false , 600 );
         }
     },
     actions: {
@@ -36,7 +43,8 @@ export default {
                 const user = userCredential.user;
                 commit('loginTrue');
             }catch(error){
-                console.log(`Code: ${error.code}, message: ${error.message}`)
+                console.log(`Code: ${error.code}, message: ${error.message}`);
+                commit('loginError');
             }
         },
         signOut: async function({ commit }){
