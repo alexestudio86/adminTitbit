@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth, signInWithEmailAndPassword, signOut  } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut  } from 'firebase/auth';
 import firebaseConfig from '../../config.js'
 import { async } from '@firebase/util';
 
@@ -40,7 +40,7 @@ export default {
             state.loader = true;
             try{
                 const userCredential  =   await signInWithEmailAndPassword( auth, state.dataUser.email, state.dataUser.password );
-                const user = userCredential.user;
+                console.log('action ejecutada')
                 commit('loginTrue');
             }catch(error){
                 console.log(`Code: ${error.code}, message: ${error.message}`);
@@ -54,6 +54,17 @@ export default {
             }catch(error){
                 console.log(error)
             }
+        },
+        checkLogin: function({ commit }){
+            const auth = getAuth();
+            const user = auth.currentUser
+            onAuthStateChanged(auth, (user) => {
+                if( user ){
+                    commit('loginTrue');;
+                }else{
+                    console.log('No user')
+                }
+            })
         }
     }
 }

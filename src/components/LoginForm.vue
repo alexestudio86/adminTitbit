@@ -54,11 +54,14 @@ export default {
             checked: localStorage.length > 0 ? JSON.parse(localStorage.getItem('user')).checked : false
         }
     },
+    mounted(){
+        this.checkLogin()
+    },
     components: {
         PlaceholderLogin
     },
     methods: {
-        ...mapActions('login', ['signIn', 'signOut']),
+        ...mapActions('login', ['signIn', 'signOut', 'checkLogin']),
         setLocal: function(){
             console.log( this.checked )
             if( !this.checked ){

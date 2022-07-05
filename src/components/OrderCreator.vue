@@ -19,19 +19,33 @@
                             <option v-for='(v, index) of orderVariants' :key="index" :value='v' >{{ v }}</option>
                         </select>
                     </div>
+                    <!-- CANTIDAD -->
                     <div class='w3-row py-2'>
-                        <div class='w3-col m10'>
-                            <div class='w3-row'>
-                                <div class='w3-col s9'>
-                                    <input class='w3-input w3-border' type='range' min='1' max='9' id='customRange2' v-model='orderQuantity'>
+                        <div class="w3-col s8">
+                            <div class="w3-row">
+                                <div class="w3-col s3">
+                                    <button class='w3-button w3-border w3-pale-green w-100' @click="orderQuantity > 1 ? orderQuantity-- : ''" >
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </button>
                                 </div>
-                                <div class='w3-col s3'>
-                                    <label for='customRange2' >{{ orderQuantity }}</label>
+                                <div class="w3-col s6">
+                                    <input class='w3-input w3-border w3-center' type='number' id='customRange2' v-model='orderQuantity'>
+                                </div>
+                                <div class="w3-col s3">
+                                    <button class='w3-button w3-border w3-pale-green w-100' v-on:click='orderQuantity < 50 ? orderQuantity++ : ""'>
+                                        <i class="fa-solid fa-angle-up"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class='w3-col s2'>
-                            <button class='w3-button w3-green w3-text-white w-100' v-on:click='makeOrderElement'>+</button>
+                        <div class="w3-col s4">
+                            <div class="w3-row">
+                                <div class="w3-col s10 w3-right">
+                                    <button class='w3-button w3-border w3-teal w3-text-white w-100' v-on:click='makeOrderElement'>
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -46,27 +60,50 @@
                     <span class="w3-badge w3-red m-1" style='cursor:pointer' v-on:click='deleteOrderElement(i)' >×</span>
                 </p>
             </div>
-            <!-- COMENTARIOS -->
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1">Comentarios</label>
-                <textarea class="w3-input w3-border" v-model='orderComments'></textarea>
-            </div>
-            <!-- FACTURA Y CLIENTE -->
-            <div class="w3-row">
-                <div class="w3-col m2 w3-center">
+            <!-- COMENTARIOS Y CLIENTES -->
+            <div class="w3-row mb-3">
+                <div class="w3-threequarter">
+                    <span>Comentarios</span>
+                    <textarea class="w3-input w3-border" v-model='orderComments'></textarea>
+                </div>
+                <div class="w3-rest w3-right">
                     <div>
-                        <label for='exampleCheck1'>Factura</label>
+                        <span>Factura</span>
                     </div>
-                    <div>
-                        <input class='w3-check w3-border' type='checkbox' v-model='orderInvoice'>
+                    <div class="w3-right">
+                        <input class='w3-check' type='checkbox' v-model='orderInvoice'>
                     </div>
                 </div>
-                <div class="w3-col m10">
+            </div>
+            <!-- PROGRAMADO -->
+            <hr />
+            <div class="w3-row">
+                <div class="w3-third">
+                    <div>
+                        <span>Programado</span>
+                    </div>
+                    <div>
+                        <input class="w3-check" type="checkbox" v-model="orderColect" />
+                    </div>
+                </div>
+                <div class="w3-rest">
+                    <div>
+                        <span>Horario</span>
+                    </div>
+                    <div>
+                        <input :disabled="!orderColect" class="w3-input w3-border" type="date" v-bind="{ value: new Date().toISOString().split('T')[0], min: new Date().toISOString().split('T')[0] }">
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!-- CLIENTE -->
+            <div class="w3-row">
+                <div class="w3-rest m10">
                     <div class='mb-3'>
                         <div class="tooltip">
                             <span class="tooltiptext px-1" id='guestTooltip'>Escriba un nombre</span>
                         </div>
-                        <label for='exampleInputEmail1'>*Cliente</label>
+                        <span>*Cliente</span>
                         <input class='w3-input w3-border' type='text' id='exampleInputEmail1' aria-describedby='emailHelp' v-model='guestName' />
                     </div>
                 </div>
@@ -91,7 +128,8 @@ export default {
             orderElements: [],
             orderComments: '',
             orderInvoice: false,
-            guestName: '',
+            orderColect: false,
+            guestName: ''
         }
     },
     created: function(){
