@@ -10,15 +10,25 @@
                     <!-- NOMBRE -->
                     <select class='w3-select' name='nameOrders' id="nameOrders" v-model='item.orderTitle' v-on:change='checkVariants'>
                         <option value="" disabled selected>Elige una opcion</option>
-                        <option v-for="(dish, index) of dishes" :key="index" :value="dish.title">{{ dish.title }}</option>
+                        <option v-for="(value, key, index) of dishes" :key="index" :value="value.name"><span v-for="(v, k, i) of value.name" :key="i">{{ k }}</span></option>
                     </select>
                     <div class='my-3' v-if='orderVariants.length > 0'>
-                        <span>*Variante</span>
                         <!-- VARIANTE -->
-                        <select class='w3-select' name="variantOrder" id="variantOrder" v-model='item.orderPrice' >
-                            <option value="" disabled='disabled' selected='selected'>Elija una opción</option>
-                            <option v-for='(v, index) of orderVariants' :key="index" :value='v.quantity' @input="item.variantSelected" >{{ v.title }}</option>
-                        </select>
+                        <div class="w3-row">
+                            <div :class="item.orderPrice ? 'w3-col s9' : 'w3-col s12'">
+                                <span>*Variante</span>
+                                <select class='w3-select' name="variantOrder" id="variantOrder" v-model='item.variant' @change="holaMundo($event)" >
+                                    <option value="" disabled='disabled' selected='selected'>Elija una opción</option>
+                                    <option v-for='(value, key, index) of orderVariants' :key="index" :value='{variantSelected:v.title, orderPrice:v.price}' >{{ v.title }}</option>
+                                </select>
+                            </div>
+                            <div class="w3-rest">
+                                <div class="w3-right-align">
+                                    <span>Precio</span>
+                                </div>
+                                <div class="w3-input w3-right-align">${{ item.orderPrice }}</div>
+                            </div>
+                        </div>
                     </div>
                     <div class='w3-row py-2'>
                         <div class="w3-col s8">
@@ -52,14 +62,19 @@
                 </div>
             </form>
             <!-- ELEMENTOS -->
+            <div class="tooltip">
+                <span class="tooltiptext px-1" id='elementsTooltip'>Añada un elemento</span>
+            </div>
             <div class="w3-border p-2 my-3 w3-light-gray">
-                <div class="tooltip">
-                    <span class="tooltiptext px-1" id='elementsTooltip'>Añada un elemento</span>
-                </div>
-                <p class='w3-tag w3-round-xxlarge w3-white w3-border w3-right-align' v-for="(e, i) of orderElements" :key="i">
-                    {{ e.title }} x {{ e.quantity }}
-                    <span class="w3-badge w3-red m-1" style='cursor:pointer' v-on:click='deleteOrderElement(i)' >×</span>
-                </p>
+                <ul class="w3-ul">
+                    <li class='w3-display-container w3-white w3-border' v-for="(e, i) of orderElements" :key="i">
+                        <p>
+                            {{ e.title }} x {{ e.quantity }} | {{ e.price }}
+                        </p>
+                        {{ e }}
+                        <span class="w3-button w3-display-right" style='cursor:pointer' v-on:click='deleteOrderElement(i)' >×</span>
+                    </li>
+                </ul>
             </div>
             <!-- COMENTARIOS Y FACTURA -->
             <div class="w3-row mb-3">
@@ -125,9 +140,11 @@ export default {
             orderVariants: [],
             item:{
                 orderTitle: '',
-                variantSelected: '',
                 orderQuantity: 1,
-                orderPrice: 0,
+                variant: {
+                    variantSelected: '',
+                    orderPrice: '',
+                }
             },
             orderElements: [],
             orderComments: '',
@@ -160,29 +177,33 @@ export default {
             const index = this.dishes.findIndex( i => i.title === this.item.orderTitle );
             const variants = this.dishes[index].variante;
             this.orderVariants.splice(0, this.orderVariants.length);
-            this.variantSelected = '';
+            this.item.variantSelected = '';
             if( Object.keys(variants).length > 0 ){
                 Object.entries(variants).forEach( ([key, value]) => {
-                    this.orderVariants.push( {title: key, quantity: parseInt(value)} );
+                    this.orderVariants.push( {title: key, price: parseInt(value)} );
                 });
             }
         },
         makeOrderElement(){
             if( this.item.orderTitle ){
-                if( this.variantSelected ){
+                // Elemento sin variante
+                if( this.item.variantSelected ){
                     const fullOrder = `${this.item.orderTitle}, ${this.item.variantSelected}`;
                     const index = this.orderElements.findIndex( i => i.title === fullOrder );
                     if(index < 0){
                         // El elemento no está
-                        this.orderElements.push( {title: fullOrder, quantity: this.item.orderQuantity, price: this.item.orderPrice} );
+                        this.orderElements.push( {title: fullOrder, quantity: this.item.variant.orderQuantity, price: this.item.variant.orderPrice} );
                     }else{
                         // El elemento si está
                         this.orderElements[index].quantity = this.item.orderQuantity;
                     }
+                // Elemento con variante
                 }else{
-                    const idx = this.orderElements.findIndex( i => i.title === this.orderTitle );
+                    const idx = this.orderElements.findIndex( i => i.title === this.item.orderTitle );
+                    // El elemento no está
                     if(idx < 0){
                         this.orderElements.push( {title: this.item.orderTitle, quantity: this.item.orderQuantity, price: this.item.orderPrice} );
+                    // El elemento si está
                     }else{
                         this.orderElements[idx].quantity = this.item.orderQuantity;           
                     }
@@ -246,6 +267,9 @@ export default {
                 this.guestName = '';
             }
             console.log( this.item )
+        },
+        holaMundo( evt ){
+            this.item.variantSelected = evt.target.options[evt.target.selectedIndex].innerText
         }
     }
 
